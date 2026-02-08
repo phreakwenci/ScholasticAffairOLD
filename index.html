@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholastic Affair | A Short Film by Jan-David Soutar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --noir-black: #0a0a0a;
+            --noir-charcoal: #1a1a2e;
+            --noir-navy: #16213e;
+            --noir-crimson: #8b2635;
+            --noir-gold: #c9a227;
+            --noir-smoke: #2d2d44;
+            --noir-fog: #4a4a6a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: var(--noir-black);
+            color: #e8e6e1;
+            overflow-x: hidden;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Rain Effect */
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+        }
+
+        .rain-drop {
+            position: absolute;
+            width: 1px;
+            height: 15px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 40;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    transparent 0%,
+                    rgba(10, 10, 10, 0.3) 20%,
+                    rgba(10, 10, 10, 0.6) 50%,
+                    rgba(10, 10, 10, 0.9) 100%);
+        }
+
+        /* Venetian Blind Effect */
+        .venetian-blinds {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .venetian-blinds::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(180deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(10, 10, 10, 0.1) 2px,
+                    rgba(10, 10, 10, 0.1) 4px);
+            pointer-events: none;
+        }
+
+        /* Glowing text effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(201, 162, 39, 0.3), 0 0 40px rgba(201, 162, 39, 0.1);
+        }
+
+        /* Cigarette smoke animation */
+        @keyframes smoke {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(2);
+            }
+        }
+
+        .smoke-particle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: smoke 6s ease-out infinite;
+        }
+
+        /* Cast card hover */
+        .cast-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cast-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(139, 38, 53, 0.2);
+        }
+
+        .cast-card:hover .cast-image {
+            filter: grayscale(0%) contrast(1.1);
+        }
+
+        .cast-image {
+            filter: grayscale(100%) contrast(1.2);
+            transition: filter 0.4s ease;
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--noir-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Button styles */
+        .btn-noir {
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            border: 1px solid var(--noir-gold);
+            color: var(--noir-gold);
+            transition: all 0.3s ease;
+        }
+
+        .btn-noir::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--noir-gold);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-noir:hover {
+            color: var(--noir-black);
+        }
+
+        .btn-noir:hover::before {
+            left: 0;
+        }
+
+        /* Laural placeholder */
+        .laurel {
+            filter: grayscale(100%) brightness(0.4);
+            opacity: 0.3;
+        }
+
+        /* Form styles */
+        input,
+        textarea {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--noir-gold);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--noir-gold), transparent);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Grain Overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Rain Effect -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <!-- Spotlight Effect -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#hero"
+                class="font-cinzel text-sm tracking-widest text-[#c9a227] hover:text-[#e8e6e1] transition-colors">
+                SCHOLASTIC AFFAIR
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#logline"
+                    class="nav-link text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Logline</a>
+                <a href="#cast"
+                    class="nav-link text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Cast</a>
+                <a href="#about"
+                    class="nav-link text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">About</a>
+                <a href="#trailer"
+                    class="nav-link text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Trailer</a>
+                <a href="#contact"
+                    class="nav-link text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-[#c9a227]" id="mobileMenuBtn">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden mt-4" id="mobileMenu">
+            <div class="flex flex-col space-y-3 pt-4 border-t border-[#c9a227]/20">
+                <a href="#logline"
+                    class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Logline</a>
+                <a href="#cast"
+                    class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Cast</a>
+                <a href="#about"
+                    class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">About</a>
+                <a href="#trailer"
+                    class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Trailer</a>
+                <a href="#contact"
+                    class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center venetian-blinds overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1920&h=1080&fit=crop"
+                 alt="1950s noir parking lot"
+                 class="w-full h-full object-cover opacity-40"
+                 id="heroImage">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/80"></div>
+        </div>
+
+        <!-- Smoke Particles -->
+        <div class="absolute bottom-0 left-1/4 smoke-particle" style="animation-delay: 0s;"></div>
+        <div class="absolute bottom-0 left-1/3 smoke-particle" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-0 right-1/3 smoke-particle" style="animation-delay: 4s;"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="reveal">
+                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-8 uppercase">A Jan-David Soutar Film
+                </p>
+
+                <h1 class="font-playfair text-6xl md:text-8xl lg:text-9xl font-bold mb-6 glow-text tracking-tight">
+                    <span class="text-[#e8e6e1]">SCHOLASTIC</span>
+                    <span class="italic text-[#8b2635] block mt-2">Affair</span>
+                </h1>
+
+                <div class="divider mx-auto mb-8"></div>
+
+                <p class="font-cinzel text-sm md:text-base tracking-[0.3em] text-gray-400 uppercase">
+                    Dramatic Thriller <span class="mx-3 text-[#c9a227]">•</span> 1950s
+                    <span class="mx-3 text-[#c9a227]">•</span> 9 Minutes
+                </p>
+
+                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#trailer" class="btn-noir px-8 py-3 text-sm tracking-widest uppercase font-cinzel">
+                        Watch Trailer
+                    </a>
+                    <a href="#about"
+                        class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors flex items-center gap-2">
+                        Learn More <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#c9a227]/40 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6"></i>
+        </div>
+    </section>
+
+    <!-- Logline Section -->
+    <section id="logline" class="relative py-24 md:py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="reveal">
+                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-8 uppercase">The Story</p>
+
+                <blockquote
+                    class="font-playfair text-2xl md:text-3xl lg:text-4xl leading-relaxed italic text-[#e8e6e1]/90">
+                    "On a stormy night in a 1950s university parking lot, a student's
+                    <span class="text-[#8b2635]">misguided attempt</span> at exposing her professor in an affair goes
+                    <span class="text-[#c9a227]">sideways</span> when she calls the professor's bluff—and his wife."
+                </blockquote>
+
+                <div class="mt-12 flex items-center justify-center gap-8">
+                    <div class="text-center">
+                        <p class="font-cinzel text-3xl text-[#c9a227]">9</p>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mt-1">Minutes</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="text-center">
+                        <p class="font-cinzel text-3xl text-[#c9a227]">1950s</p>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mt-1">Period</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="text-center">
+                        <p class="font-cinzel text-3xl text-[#c9a227]">2026</p>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mt-1">Release</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cast Section -->
+    <section id="cast" class="relative py-24 md:py-32 px-6 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d15] to-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-4 uppercase">Ensemble</p>
+                <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1]">The Cast</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <!-- Grace -->
+                <div class="cast-card group reveal">
+                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop"
+                             alt="Tyler Hampton as Grace"
+                             class="cast-image w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Student</p>
+                        </div>
+                    </div>
+                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Tyler Hampton</h3>
+                    <p class="text-sm text-gray-400 italic">as Grace</p>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The ambitious student with a dangerous plan.
+                    </p>
+                </div>
+
+                <!-- Professor John -->
+                <div class="cast-card group reveal" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
+                             alt="Elvis Nolasco as Professor John"
+                             class="cast-image w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Professor</p>
+                        </div>
+                    </div>
+                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Elvis Nolasco</h3>
+                    <p class="text-sm text-gray-400 italic">as Professor John</p>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The calculating professor hiding a secret.</p>
+                </div>
+
+                <!-- Claudia -->
+                <div class="cast-card group reveal" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop"
+                             alt="Adalgiza Chermont as Claudia"
+                             class="cast-image w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Wife</p>
+                        </div>
+                    </div>
+                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Adalgiza Chermont</h3>
+                    <p class="text-sm text-gray-400 italic">as Claudia</p>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">Whose arrival changes everything.</p>
+                </div>
+
+                <!-- Bobby -->
+                <div class="cast-card group reveal" style="transition-delay: 0.3s;">
+                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop"
+                             alt="Eric B. Anthony as Bobby"
+                             class="cast-image w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Disruptor</p>
+                        </div>
+                    </div>
+                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Eric B. Anthony</h3>
+                    <p class="text-sm text-gray-400 italic">as Bobby</p>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The charming disruptor caught in the
+                        crossfire.</p>
+                </div>
+
+                <!-- Mr. Puck -->
+                <div class="cast-card group reveal" style="transition-delay: 0.4s;">
+                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop"
+                             alt="Clent Bowers as Mr. Puck"
+                             class="cast-image w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Observer</p>
+                        </div>
+                    </div>
+                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Clent Bowers</h3>
+                    <p class="text-sm text-gray-400 italic">as Mr. Puck</p>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The omniscient observer lurking at the edge of
+                        the night.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Film Section -->
+    <section id="about" class="relative py-24 md:py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+                <div class="reveal">
+                    <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-8 uppercase">The Film</p>
+
+                    <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1] mb-8 leading-tight">
+                        A Thesis Film in <span class="italic text-[#8b2635]">Final Post-Production</span>
+                    </h2>
+
+                    <div class="space-y-6 text-gray-400 leading-relaxed">
+                        <p>
+                            <span class="text-[#e8e6e1] font-semibold">Scholastic Affair</span> is a 9-minute dramatic
+                            thriller that unfolds in real-time on a stormy night, weaving together themes of gender,
+                            power, and the devastating consequences of secrets exposed.
+                        </p>
+                        <p>
+                            Drawing from the shadow-soaked aesthetic of classic noir and the psychological intensity of
+                            Tennessee Williams, the film examines campus politics through a lens of moral
+                            ambiguity—where every character believes themselves justified, and no one escapes unscathed.
+                        </p>
+                        <p>
+                            Shot in meticulous period detail, the parking lot becomes a stage for power dynamics:
+                            fluorescent lights hum with tension, rain-slicked asphalt reflects fractured loyalties, and
+                            a single car becomes the crucible for lives forever altered.
+                        </p>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-2">Runtime</p>
+                            <p class="text-[#e8e6e1]">9 Minutes</p>
+                        </div>
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-2">Genre</p>
+                            <p class="text-[#e8e6e1]">Dramatic Thriller / Period Short</p>
+                        </div>
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-2">Format</p>
+                            <p class="text-[#e8e6e1]">Narrative Short Film</p>
+                        </div>
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-2">Status</p>
+                            <p class="text-[#e8e6e1]">Color + Sound Final</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=600&fit=crop"
+                             alt="Behind the scenes"
+                             class="w-full venetian-blinds opacity-80">
+                        <div class="absolute -bottom-4 -left-4 w-full h-full border border-[#c9a227]/30 -z-10"></div>
+                    </div>
+
+                    <!-- Team -->
+                    <div class="mt-12">
+                        <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-6 uppercase">Creative Team
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
+                                <span class="text-gray-400 text-sm">Writer / Director</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm">Jan-David Soutar</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
+                                <span class="text-gray-400 text-sm">Cinematographer</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">[TBA]</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
+                                <span class="text-gray-400 text-sm">Editor</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">[TBA]</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
+                                <span class="text-gray-400 text-sm">Producer(s)</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">[TBA]</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3">
+                                <span class="text-gray-400 text-sm">Original Score</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">Select Period Music</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trailer Section -->
+    <section id="trailer" class="relative py-24 md:py-32 px-6 bg-[#0d0d15]">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="reveal">
+                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-8 uppercase">Preview</p>
+
+                <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1] mb-12">Watch the Fine Cut</h2>
+
+                <!-- Video Placeholder -->
+                <div class="relative aspect-video bg-[#1a1a2e] rounded-sm overflow-hidden group cursor-pointer"
+                    id="videoPlaceholder">
+                    <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=1200&h=675&fit=crop"
+                         alt="Trailer thumbnail"
+                         class="w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-500">
+
+                    <!-- Play Button -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#c9a227] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <div
+                                class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#c9a227]/10 flex items-center justify-center">
+                                <i data-lucide="play" class="w-8 h-8 md:w-10 md:h-10 text-[#c9a227] ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overlay Text -->
+                    <div
+                        class="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-[#0a0a0a] to-transparent">
+                        <p class="font-cinzel text-sm tracking-widest text-[#c9a227] uppercase mb-2">Fine Cut</p>
+                        <p class="text-xs text-gray-400">Access via Vimeo or Google Drive • Password protected</p>
+                    </div>
+
+                    <!-- Coming Soon Overlay (toggle this to show video) -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/80"
+                        id="comingSoonOverlay">
+                        <div class="text-center">
+                            <p class="font-playfair text-2xl md:text-3xl text-[#e8e6e1] mb-2">Coming Soon</p>
+                            <p class="text-sm text-gray-400">Final color and sound in progress</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="lock" class="w-3 h-3"></i>
+                        Password Protected
+                    </span>
+                    <span class="hidden sm:inline text-[#c9a227]/30">|</span>
+                    <span>HD 1080p</span>
+                    <span class="hidden sm:inline text-[#c9a227]/30">|</span>
+                    <span>5.1 Surround Sound</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Festivals Section -->
+    <section class="relative py-16 md:py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-4 uppercase">Recognition</p>
+                <h2 class="font-playfair text-3xl md:text-4xl text-[#e8e6e1]">Festival Circuit</h2>
+                <p class="text-gray-500 text-sm mt-4">Submissions opening 2026 • Watch this space</p>
+            </div>
+
+            <!-- Laurel Placeholders -->
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center opacity-30">
+                <div class="laurel text-center">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-2 fill-current text-[#c9a227]">
+                        <path
+                            d="M50 5 C30 5, 15 25, 15 45 C15 65, 35 85, 50 95 C65 85, 85 65, 85 45 C85 25, 70 5, 50 5 Z" />
+                        <text x="50" y="55" text-anchor="middle" font-size="8" fill="#0a0a0a">OFFICIAL</text>
+                    </svg>
+                    <p class="text-xs tracking-widest">SELECTION</p>
+                </div>
+                <div class="laurel text-center">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-2 fill-current text-[#c9a227]">
+                        <path
+                            d="M50 5 C30 5, 15 25, 15 45 C15 65, 35 85, 50 95 C65 85, 85 65, 85 45 C85 25, 70 5, 50 5 Z" />
+                        <text x="50" y="55" text-anchor="middle" font-size="8" fill="#0a0a0a">BEST</text>
+                    </svg>
+                    <p class="text-xs tracking-widest">SHORT</p>
+                </div>
+                <div class="laurel text-center">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-2 fill-current text-[#c9a227]">
+                        <path
+                            d="M50 5 C30 5, 15 25, 15 45 C15 65, 35 85, 50 95 C65 85, 85 65, 85 45 C85 25, 70 5, 50 5 Z" />
+                        <text x="50" y="55" text-anchor="middle" font-size="8" fill="#0a0a0a">SPECIAL</text>
+                    </svg>
+                    <p class="text-xs tracking-widest">JURY</p>
+                </div>
+                <div class="laurel text-center">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-2 fill-current text-[#c9a227]">
+                        <path
+                            d="M50 5 C30 5, 15 25, 15 45 C15 65, 35 85, 50 95 C65 85, 85 65, 85 45 C85 25, 70 5, 50 5 Z" />
+                        <text x="50" y="55" text-anchor="middle" font-size="8" fill="#0a0a0a">AUDIENCE</text>
+                    </svg>
+                    <p class="text-xs tracking-widest">CHOICE</p>
+                </div>
+                <div class="laurel text-center">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-2 fill-current text-[#c9a227]">
+                        <path
+                            d="M50 5 C30 5, 15 25, 15 45 C15 65, 35 85, 50 95 C65 85, 85 65, 85 45 C85 25, 70 5, 50 5 Z" />
+                        <text x="50" y="55" text-anchor="middle" font-size="8" fill="#0a0a0a">BEST</text>
+                    </svg>
+                    <p class="text-xs tracking-widest">ACTRESS</p>
+                </div>
+                <div class="laurel text-center">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 mx-auto mb-2 fill-current text-[#c9a227]">
+                        <path
+                            d="M50 5 C30 5, 15 25, 15 45 C15 65, 35 85, 50 95 C65 85, 85 65, 85 45 C85 25, 70 5, 50 5 Z" />
+                        <text x="50" y="55" text-anchor="middle" font-size="8" fill="#0a0a0a">BEST</text>
+                    </svg>
+                    <p class="text-xs tracking-widest">DIRECTOR</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-24 md:py-32 px-6 bg-gradient-to-b from-[#0a0a0a] to-[#0d0d15]">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-4 uppercase">Inquiries</p>
+                <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1] mb-6">Get in Touch</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">For festival coordinators, press inquiries, or screening
+                    requests.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="reveal">
+                    <form class="space-y-6" id="contactForm">
+                        <div>
+                            <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Name</label>
+                            <input type="text" required
+                                   class="w-full px-4 py-3 text-[#e8e6e1] text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Email</label>
+                            <input type="email" required
+                                   class="w-full px-4 py-3 text-[#e8e6e1] text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Inquiry Type</label>
+                            <select class="w-full px-4 py-3 text-[#e8e6e1] text-sm bg-transparent border border-[#c9a227]/20">
+                                <option value="" class="bg-[#0a0a0a]">Select...</option>
+                                <option value="festival" class="bg-[#0a0a0a]">Festival Submission</option>
+                                <option value="press" class="bg-[#0a0a0a]">Press / Media</option>
+                                <option value="screening" class="bg-[#0a0a0a]">Screening Request</option>
+                                <option value="other" class="bg-[#0a0a0a]">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Message</label>
+                            <textarea rows="4" required
+                                      class="w-full px-4 py-3 text-[#e8e6e1] text-sm resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="btn-noir w-full py-4 text-sm tracking-widest uppercase font-cinzel">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <div class="space-y-8">
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-3">Director</p>
+                            <p class="text-[#e8e6e1] font-playfair text-xl">Jan-David Soutar</p>
+                            <p class="text-gray-500 text-sm mt-1">Writer / Director</p>
+                        </div>
+
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-3">Production</p>
+                            <p class="text-[#e8e6e1]">MDLA Films</p>
+                            <p class="text-gray-500 text-sm mt-1">Thesis Film Production</p>
+                        </div>
+
+                        <div>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-3">Connect</p>
+                            <div class="flex items-center gap-4">
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
+                                    <i data-lucide="instagram" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
+                                    <i data-lucide="vimeo" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
+                                    <i data-lucide="film" class="w-4 h-4"></i>
+                                </a>
+                                <a href="mailto:contact@scholasticaffair.film"
+                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
+                                    <i data-lucide="mail" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="pt-8 border-t border-[#c9a227]/10">
+                            <p class="text-xs text-gray-500 leading-relaxed">
+                                For press kits, high-resolution stills, and screener access, please contact us directly.
+                                Festival programmers may request password-protected viewing links.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-12 px-6 border-t border-[#c9a227]/10">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+                <p class="font-cinzel text-sm tracking-widest text-[#c9a227]">SCHOLASTIC AFFAIR</p>
+                <p class="text-xs text-gray-500 mt-1">© 2026 Jan-David Soutar. All rights reserved.</p>
+            </div>
+            <div class="flex items-center gap-6 text-xs text-gray-500">
+                <a href="#" class="hover:text-[#e8e6e1] transition-colors">Privacy</a>
+                <a href="#" class="hover:text-[#e8e6e1] transition-colors">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+         // Rain effect
+        function createRain() {
+            const container = document.getElementById('rainContainer');
+            const dropCount = 50;
+            
+            for (let i = 0; i < dropCount; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                drop.style.opacity = Math.random() * 0.3;
+                container.appendChild(drop);
+            }
+        }
+        createRain();
+
+         // Spotlight effect
+        const spotlight = document.getElementById('spotlight');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            spotlight.style.setProperty('--mouse-x', x + '%');
+            spotlight.style.setProperty('--mouse-y', y + '%');
+        });
+
+         // Scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+         const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+         // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-[#0a0a0a]/95', 'backdrop-blur-sm', 'border-b', 'border-[#c9a227]/10');
+            } else {
+                navbar.classList.remove('bg-[#0a0a0a]/95', 'backdrop-blur-sm', 'border-b', 'border-[#c9a227]/10');
+            }
+        });
+
+         // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+         // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+         // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your inquiry. We will respond shortly.');
+            e.target.reset();
+        });
+
+         // Video placeholder click
+        document.getElementById('videoPlaceholder').addEventListener('click', () => {
+            const overlay = document.getElementById('comingSoonOverlay');
+            if (overlay.style.display === 'none') {
+                // Show video embed
+            } else {
+                alert('The fine cut will be available soon. Contact us for screener access.');
+            }
+        });
+    </script>
+    <script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+
+</html>
