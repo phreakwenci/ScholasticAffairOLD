@@ -73,7 +73,7 @@
 
         .rain-drop {
             position: absolute;
-            width: 1px;
+            width: 20px;
             height: 15px;
             background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: fall linear infinite;
@@ -135,7 +135,7 @@
             }
 
             50% {
-                opacity: 0.3;
+                opacity: 0.9;
             }
 
             100% {
@@ -330,16 +330,19 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center venetian-blinds overflow-hidden">
-        <!-- Background Image -->
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1920&h=1080&fit=crop"
-                 alt="1950s noir parking lot"
-                 class="w-full h-full object-cover opacity-40"
-                 id="heroImage">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]/80"></div>
+    <section id="hero"
+        class="relative min-h-screen flex items-center justify-center venetian-blinds overflow-hidden bg-[#0a0a0a]">
+        <div class="absolute inset-0 z-0">
+            <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/Touched_up_Hero_Image-1-Large_Version.png"
+             alt="MD>LA Films"
+             class="w-full h-full object-cover opacity-60 mix-blend-luminosity"
+             id="heroImage">
+
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-[#0a0a0a] opacity-40"></div>
         </div>
+
 
         <!-- Smoke Particles -->
         <div class="absolute bottom-0 left-1/4 smoke-particle" style="animation-delay: 0s;"></div>
@@ -366,7 +369,7 @@
 
                 <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a href="#trailer" class="btn-noir px-8 py-3 text-sm tracking-widest uppercase font-cinzel">
-                        Watch Trailer
+                        Trailer Coming Soon
                     </a>
                     <a href="#about"
                         class="text-xs tracking-widest uppercase text-gray-400 hover:text-[#e8e6e1] transition-colors flex items-center gap-2">
@@ -392,7 +395,7 @@
                     class="font-playfair text-2xl md:text-3xl lg:text-4xl leading-relaxed italic text-[#e8e6e1]/90">
                     "On a stormy night in a 1950s university parking lot, a student's
                     <span class="text-[#8b2635]">misguided attempt</span> at exposing her professor in an affair goes
-                    <span class="text-[#c9a227]">sideways</span> when she calls the professor's bluff—and his wife."
+                    <span class="text-[#c9a227]">sideways</span> when she calls the professor's bluff... and his wife."
                 </blockquote>
 
                 <div class="mt-12 flex items-center justify-center gap-8">
@@ -416,114 +419,95 @@
     </section>
 
     <!-- Cast Section -->
-    <section id="cast" class="relative py-24 md:py-32 px-6 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d15] to-[#0a0a0a]">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-4 uppercase">Ensemble</p>
-                <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1]">The Cast</h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                <!-- Grace -->
-                <div class="cast-card group reveal">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop"
-                             alt="Tyler Hampton as Grace"
-                             class="cast-image w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Student</p>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Tyler Hampton</h3>
-                    <p class="text-sm text-gray-400 italic">as Grace</p>
-                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The ambitious student with a dangerous plan.
-                    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <a href="https://www.imdb.com/name/nm13863024/" target="_blank" class="cast-card group reveal">
+            <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/TYLER_HS_V1.webp"
+                 alt="Tyler Hampton as Grace"
+                 class="cast-image w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
                 </div>
-
-                <!-- Professor John -->
-                <div class="cast-card group reveal" style="transition-delay: 0.1s;">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
-                             alt="Elvis Nolasco as Professor John"
-                             class="cast-image w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Professor</p>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Elvis Nolasco</h3>
-                    <p class="text-sm text-gray-400 italic">as Professor John</p>
-                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The calculating professor hiding a secret.</p>
-                </div>
-
-                <!-- Claudia -->
-                <div class="cast-card group reveal" style="transition-delay: 0.2s;">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop"
-                             alt="Adalgiza Chermont as Claudia"
-                             class="cast-image w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Wife</p>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Adalgiza Chermont</h3>
-                    <p class="text-sm text-gray-400 italic">as Claudia</p>
-                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">Whose arrival changes everything.</p>
-                </div>
-
-                <!-- Bobby -->
-                <div class="cast-card group reveal" style="transition-delay: 0.3s;">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop"
-                             alt="Eric B. Anthony as Bobby"
-                             class="cast-image w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Disruptor</p>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Eric B. Anthony</h3>
-                    <p class="text-sm text-gray-400 italic">as Bobby</p>
-                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The charming disruptor caught in the
-                        crossfire.</p>
-                </div>
-
-                <!-- Mr. Puck -->
-                <div class="cast-card group reveal" style="transition-delay: 0.4s;">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop"
-                             alt="Clent Bowers as Mr. Puck"
-                             class="cast-image w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Observer</p>
-                        </div>
-                    </div>
-                    <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Clent Bowers</h3>
-                    <p class="text-sm text-gray-400 italic">as Mr. Puck</p>
-                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">The omniscient observer lurking at the edge of
-                        the night.</p>
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Student</p>
                 </div>
             </div>
-        </div>
+            <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Tyler Hampton</h3>
+            <p class="text-sm text-gray-400 italic">as Grace</p>
+        </a>
+
+        <a href="https://www.imdb.com/name/nm0634393/" target="_blank" class="cast-card group reveal"
+            style="transition-delay: 0.1s;">
+            <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/ELVIS_HS_1.jpeg.webp"
+                 alt="Elvis Nolasco as Professor John"
+                 class="cast-image w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Professor</p>
+                </div>
+            </div>
+            <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Elvis Nolasco</h3>
+            <p class="text-sm text-gray-400 italic">as Professor John</p>
+        </a>
+
+        <a href="https://www.imdb.com/name/nm3297699/" target="_blank" class="cast-card group reveal"
+            style="transition-delay: 0.2s;">
+            <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/ADALGIZA_CHERMONT_V1.webp"
+                 alt="Adalgiza Chermont as Claudia"
+                 class="cast-image w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Wife</p>
+                </div>
+            </div>
+            <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Adalgiza Chermont</h3>
+            <p class="text-sm text-gray-400 italic">as Claudia</p>
+        </a>
+
+        <a href="https://www.imdb.com/name/nm1677615/" target="_blank" class="cast-card group reveal"
+            style="transition-delay: 0.3s;">
+            <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/ERIC_HS_1.webp"
+                 alt="Eric B. Anthony as Bobby"
+                 class="cast-image w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Disruptor</p>
+                </div>
+            </div>
+            <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Eric B. Anthony</h3>
+            <p class="text-sm text-gray-400 italic">as Bobby</p>
+        </a>
+
+        <a href="https://www.imdb.com/name/nm1384200/" target="_blank" class="cast-card group reveal"
+            style="transition-delay: 0.4s;">
+            <div class="relative overflow-hidden aspect-[3/4] mb-4">
+                <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/CLENT_BOWERS_1.webp"
+                 alt="Clent Bowers as Mr. Puck"
+                 class="cast-image w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60">
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase">The Observer</p>
+                </div>
+            </div>
+            <h3 class="font-playfair text-xl text-[#e8e6e1] mb-1">Clent Bowers</h3>
+            <p class="text-sm text-gray-400 italic">as Mr. Puck</p>
+        </a>
+    </div>
     </section>
 
+    <!-- About Film Section -->
     <!-- About Film Section -->
     <section id="about" class="relative py-24 md:py-32 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+                <!-- Left Column: Text -->
                 <div class="reveal">
                     <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-8 uppercase">The Film</p>
 
@@ -540,7 +524,8 @@
                         <p>
                             Drawing from the shadow-soaked aesthetic of classic noir and the psychological intensity of
                             Tennessee Williams, the film examines campus politics through a lens of moral
-                            ambiguity—where every character believes themselves justified, and no one escapes unscathed.
+                            ambiguity; where every character believes themselves justified, and no one escapes
+                            unscathed.
                         </p>
                         <p>
                             Shot in meticulous period detail, the parking lot becomes a stage for power dynamics:
@@ -569,17 +554,20 @@
                     </div>
                 </div>
 
+                <!-- Right Column: Image + Team -->
                 <div class="reveal" style="transition-delay: 0.2s;">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=600&fit=crop"
-                             alt="Behind the scenes"
-                             class="w-full venetian-blinds opacity-80">
-                        <div class="absolute -bottom-4 -left-4 w-full h-full border border-[#c9a227]/30 -z-10"></div>
-                    </div>
 
+                    <!-- Image with gold shadow border — no positioning hacks -->
+                    <div class="venetian-blinds">
+                        <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/Touched_up_Hero_Image-1-Large_Version.png"
+                         alt="Behind the scenes"
+                         class="w-full block opacity-80"
+                         style="box-shadow: -8px 8px 0px rgba(201, 162, 39, 0.25);">
+                    </div>
                     <!-- Team -->
-                    <div class="mt-12">
-                        <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-6 uppercase">Creative Team
+                    <div class="mt-12 max-w-lg">
+                        <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-6 uppercase">
+                            Creative Team
                         </p>
 
                         <div class="space-y-4">
@@ -587,27 +575,30 @@
                                 <span class="text-gray-400 text-sm">Writer / Director</span>
                                 <span class="text-[#e8e6e1] font-cinzel text-sm">Jan-David Soutar</span>
                             </div>
+
                             <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
                                 <span class="text-gray-400 text-sm">Cinematographer</span>
-                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">[TBA]</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">Josh Ratti</span>
                             </div>
+
                             <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
                                 <span class="text-gray-400 text-sm">Editor</span>
-                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">[TBA]</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">Audrey Kuehl</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-[#c9a227]/10">
-                                <span class="text-gray-400 text-sm">Producer(s)</span>
-                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">[TBA]</span>
+
+                            <div class="flex justify-between items-start py-3 border-b border-[#c9a227]/10">
+                                <span class="text-gray-400 text-sm mt-1">Producer(s)</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider text-right max-w-[200px]">
+                                Jan-David Soutar, Scott Tan, Megan Rippey
+                            </span>
                             </div>
+
                             <div class="flex justify-between items-center py-3">
                                 <span class="text-gray-400 text-sm">Original Score</span>
-                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">Select Period Music</span>
+                                <span class="text-[#e8e6e1] font-cinzel text-sm tracking-wider">Courtesy of Numero Group</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Trailer Section -->
@@ -616,17 +607,17 @@
             <div class="reveal">
                 <p class="font-cinzel text-xs tracking-[0.5em] text-[#c9a227]/60 mb-8 uppercase">Preview</p>
 
-                <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1] mb-12">Watch the Fine Cut</h2>
+                <h2 class="font-playfair text-4xl md:text-5xl text-[#e8e6e1] mb-12">Watch the Trailer</h2>
 
                 <!-- Video Placeholder -->
                 <div class="relative aspect-video bg-[#1a1a2e] rounded-sm overflow-hidden group cursor-pointer"
                     id="videoPlaceholder">
-                    <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=1200&h=675&fit=crop"
-                         alt="Trailer thumbnail"
-                         class="w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-500">
 
-                    <!-- Play Button -->
-                    <div class="absolute inset-0 flex items-center justify-center">
+                    <img src="https://raw.githubusercontent.com/phreakwenci/ScholasticAffairOLD/MAIN_OLD/images/CLAPBOARD_2.png"
+                                     alt="Trailer thumbnail"
+                                     class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+
+                    <div class="absolute inset-0 flex items-center justify-center z-30">
                         <div
                             class="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#c9a227] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <div
@@ -636,23 +627,21 @@
                         </div>
                     </div>
 
-                    <!-- Overlay Text -->
                     <div
-                        class="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-[#0a0a0a] to-transparent">
+                        class="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-[#0a0a0a]/60 to-transparent z-30">
                         <p class="font-cinzel text-sm tracking-widest text-[#c9a227] uppercase mb-2">Fine Cut</p>
                         <p class="text-xs text-gray-400">Access via Vimeo or Google Drive • Password protected</p>
                     </div>
 
-                    <!-- Coming Soon Overlay (toggle this to show video) -->
-                    <div class="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/80"
+                    <div class="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/40 group-hover:bg-[#0a0a0a]/20 transition-colors z-20"
                         id="comingSoonOverlay">
                         <div class="text-center">
-                            <p class="font-playfair text-2xl md:text-3xl text-[#e8e6e1] mb-2">Coming Soon</p>
-                            <p class="text-sm text-gray-400">Final color and sound in progress</p>
+                            <p class="font-playfair text-2xl md:text-3xl text-[#e8e6e1] mb-2 drop-shadow-lg">Coming Soon
+                            </p>
+                            <p class="text-sm text-gray-400 drop-shadow-md">Final color and sound in progress</p>
                         </div>
                     </div>
-                </div>
-
+                </div> ```
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
                     <span class="flex items-center gap-2">
                         <i data-lucide="lock" class="w-3 h-3"></i>
@@ -743,20 +732,20 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- Contact Form -->
                 <div class="reveal">
-                    <form class="space-y-6" id="contactForm">
+                    <form class="space-y-6" id="contactForm" action="https://formspree.io/f/mbdaaken" method="POST">
                         <div>
                             <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Name</label>
-                            <input type="text" required
+                            <input type="text" name="name" required
                                    class="w-full px-4 py-3 text-[#e8e6e1] text-sm">
                         </div>
                         <div>
                             <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Email</label>
-                            <input type="email" required
+                            <input type="email" name="email" required
                                    class="w-full px-4 py-3 text-[#e8e6e1] text-sm">
                         </div>
                         <div>
                             <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Inquiry Type</label>
-                            <select class="w-full px-4 py-3 text-[#e8e6e1] text-sm bg-transparent border border-[#c9a227]/20">
+                            <select name="type" class="w-full px-4 py-3 text-[#e8e6e1] text-sm bg-transparent border border-[#c9a227]/20">
                                 <option value="" class="bg-[#0a0a0a]">Select...</option>
                                 <option value="festival" class="bg-[#0a0a0a]">Festival Submission</option>
                                 <option value="press" class="bg-[#0a0a0a]">Press / Media</option>
@@ -766,10 +755,10 @@
                         </div>
                         <div>
                             <label class="block text-xs tracking-widest uppercase text-[#c9a227] mb-2">Message</label>
-                            <textarea rows="4" required
+                            <textarea name="message" rows="4" required
                                       class="w-full px-4 py-3 text-[#e8e6e1] text-sm resize-none"></textarea>
                         </div>
-                        <button type="submit" class="btn-noir w-full py-4 text-sm tracking-widest uppercase font-cinzel">
+                        <button type="submit" id="submitBtn" class="btn-noir w-full py-4 text-sm tracking-widest uppercase font-cinzel">
                             Send Message
                         </button>
                     </form>
@@ -791,27 +780,40 @@
                         </div>
 
                         <div>
-                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-3">Connect</p>
-                            <div class="flex items-center gap-4">
-                                <a href="#"
-                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
-                                    <i data-lucide="instagram" class="w-4 h-4"></i>
-                                </a>
-                                <a href="#"
-                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
-                                    <i data-lucide="vimeo" class="w-4 h-4"></i>
-                                </a>
-                                <a href="#"
-                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
-                                    <i data-lucide="film" class="w-4 h-4"></i>
-                                </a>
-                                <a href="mailto:contact@scholasticaffair.film"
-                                    class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300">
-                                    <i data-lucide="mail" class="w-4 h-4"></i>
-                                </a>
+                            <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-3"><div>
+                                <p class="font-cinzel text-xs tracking-widest text-[#c9a227] uppercase mb-3">Connect</p>
+                                <div class="flex items-center gap-4">
+                                    <a href="https://www.instagram.com/mdla_films" target="_blank"
+                                        class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300"
+                                        title="Instagram">
+                                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                                    </a>
+                            
+                                    <a href="https://youtube.com/@mdlafilms" target="_blank"
+                                        class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300"
+                                        title="Vimeo">
+                                        <i data-lucide="video" class="w-4 h-4"></i>
+                                    </a>
+                            
+                                    <a href="https://jandavidsoutar.com" target="_blank"
+                                        class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300"
+                                        title="Director's Website">
+                                        <i data-lucide="film" class="w-4 h-4"></i>
+                                    </a>
+                            
+                                    <a href="https://www.imdb.com/title/tt34992231" target="_blank"
+                                        class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300"
+                                        title="IMDb Project Page">
+                                        <span class="text-[9px] font-bold tracking-tighter">IMDb</span>
+                                    </a>
+                            
+                                    <a href="mailto:mdlafilms@gmail.com"
+                                        class="w-10 h-10 rounded-full border border-[#c9a227]/30 flex items-center justify-center text-[#c9a227] hover:bg-[#c9a227] hover:text-[#0a0a0a] transition-all duration-300"
+                                        title="Email Inquiries">
+                                        <i data-lucide="mail" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
                         <div class="pt-8 border-t border-[#c9a227]/10">
                             <p class="text-xs text-gray-500 leading-relaxed">
                                 For press kits, high-resolution stills, and screener access, please contact us directly.
@@ -909,11 +911,42 @@
         });
 
          // Form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your inquiry. We will respond shortly.');
-            e.target.reset();
-        });
+// Form submission with Formspree AJAX
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+
+contactForm.addEventListener('submit', async (e) => {
+e.preventDefault();
+
+// Change button state
+const originalBtnText = submitBtn.innerText;
+submitBtn.innerText = 'SENDING...';
+submitBtn.disabled = true;
+
+const data = new FormData(contactForm);
+
+try {
+const response = await fetch(contactForm.action, {
+method: 'POST',
+body: data,
+headers: {
+'Accept': 'application/json'
+}
+});
+
+if (response.ok) {
+alert('Thank you for your inquiry. We will respond shortly.');
+contactForm.reset();
+} else {
+alert('Oops! There was a problem submitting your form. Please try again.');
+}
+} catch (error) {
+alert('Error connecting to the server. Please check your connection.');
+} finally {
+submitBtn.innerText = originalBtnText;
+submitBtn.disabled = false;
+}
+});
 
          // Video placeholder click
         document.getElementById('videoPlaceholder').addEventListener('click', () => {
@@ -925,7 +958,7 @@
             }
         });
     </script>
-    <script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+    
 </body>
 
 </html>
